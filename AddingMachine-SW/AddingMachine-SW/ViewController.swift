@@ -9,14 +9,29 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    var numText1: UITextField?
+    var numText2: UITextField?
+    var numLable: UILabel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         setupUI()
     }
     func calc(){
-        print("erwr")
+        
+        print("\(numText1?.text)---\(numText2?.text)")
+        
+        //将文本框 的内容转化为int
+        guard let num1 = Int(numText1?.text ?? ""),
+              let num2 = Int(numText2?.text ?? "")
+        else {
+            print("必须输入数字才能运算")
+            return
+            
+        }
+        //处理 结果
+        numLable?.text = "\(num1+num2)"
     }
     func setupUI() -> () {
         //1.两个textField
@@ -28,6 +43,8 @@ class ViewController: UIViewController {
         tf2.borderStyle = .roundedRect
         tf2.text="0"
         view.addSubview(tf2)
+        numText1 = tf1
+        numText2 = tf2
         
         //2.三个label
         let l1 = UILabel(frame: CGRect(x: 120, y: 20, width: 20, height: 30))
@@ -44,6 +61,7 @@ class ViewController: UIViewController {
         l3.text="0"
         l3.textAlignment = .right
         view.addSubview(l3)
+        numLable = l3
         
         //3.一个button
         
